@@ -433,7 +433,7 @@ Animator:
   m_GameObject: {fileID: 382982059}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 447caafe71f8705478317ac2499082c6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c68674da6ada1e499679ee3e3fba0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 30
+  moveForce: 20
   maxSpeed: 5
   jumpForce: 200
   groundCheck: {fileID: 373108874}
