@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class CharacterController2D : MonoBehaviour {
-	public float moveForce = 30f;
+	// Threshold before input will be handled. Arbitrary.
+	public float inputThreshold = 0.2f;
+
+	public float moveSpeed = 2f;
 	public float maxSpeed = 5f;
-	public float jumpForce = 200f;
+	public float jumpForce = 5f;
 
 	public Transform groundCheck;
 	public LayerMask groundLayerMask;
@@ -18,14 +22,14 @@ public class CharacterController2D : MonoBehaviour {
 	private Rigidbody2D rigidbody2D;
 
 	// Use this for initialization
-	void Start () {
-		animator = GetComponent<Animator> ();
-		rigidbody2D = GetComponent<Rigidbody2D> ();
+	void Start() {
+		animator = GetComponent<Animator>();
+		rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetButtonDown("Jump") && isGrounded) {
+	void Update() {
+		if(Input.GetButtonDown("Jump") && isGrounded) {
 			jump = true;
 		}
 	}
@@ -33,26 +37,38 @@ public class CharacterController2D : MonoBehaviour {
 	// Perform Physics simulation within FixedUpdate. Runs 50 times per second.
 	void FixedUpdate() {
 		isGrounded = Physics2D.Linecast(transform.position, groundCheck.position, groundLayerMask);
-		HandleHorizontalMovement (Input.GetAxis ("Horizontal"));
+		animator.SetBool("Grounded", isGrounded);
 
-		if (jump) {
-			Jump ();
-		}
+		HandleHorizontalMovement(Input.GetAxis ("Horizontal"));
+		HandleVerticalMovement();
 	}
 
 	private void HandleHorizontalMovement(float horizontal) {
-		animator.SetFloat("Speed", Mathf.Abs(horizontal));
+		
+		animator.SetFloat("WalkSpeed", Mathf.Abs(horizontal));
 
-		if (horizontal * rigidbody2D.velocity.x < maxSpeed) {
-			rigidbody2D.AddForce(Vector2.right * horizontal * moveForce);
+		if(Mathf.Abs(horizontal) >= inputThreshold) {
+			float currentSpeed = horizontal * rigidbody2D.velocity.x;
+
+			if (currentSpeed < moveSpeed) {
+				rigidbody2D.AddForce(Vector2.right * horizontal * (moveSpeed - currentSpeed), ForceMode2D.Impulse);
+			}
+
+			ConstrainSpeed();
+			DetermineFacing(horizontal);
+		}
+	}
+
+	private void HandleVerticalMovement() {
+		if (jump) {
+			Jump();
 		}
 
-		ConstrainSpeed ();
-		DetermineFacing (horizontal);
+		animator.SetFloat("VerticalSpeed", Mathf.Sign(rigidbody2D.velocity.y));
 	}
 
 	private void ConstrainSpeed() {
-		if (Mathf.Abs (rigidbody2D.velocity.x) > maxSpeed) {
+		if (Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed) {
 			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 		}
 	}
@@ -60,9 +76,9 @@ public class CharacterController2D : MonoBehaviour {
 	private void DetermineFacing(float horizontal) {
 		// Sprite faces left by default
 		if (horizontal < 0 && !facingRight) {
-			Flip ();
+			Flip();
 		} else if (horizontal > 0 && facingRight) {
-			Flip ();
+			Flip();
 		}
 	}
 
@@ -72,9 +88,8 @@ public class CharacterController2D : MonoBehaviour {
 	}
 
 	private void Jump() {
-		Debug.Log ("Jumping");
 		animator.SetTrigger("Jump");
-		rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+		rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
 		jump = false;
 	}
 }
