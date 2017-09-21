@@ -4,9 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class CharacterController2D : MonoBehaviour {
-	// Threshold before input will be handled. Arbitrary.
-	public float inputThreshold = 0.5f;
-
 	public float moveSpeed = 2f;
 	public float maxSpeed = 5f;
 	public float jumpForce = 5f;
@@ -47,16 +44,10 @@ public class CharacterController2D : MonoBehaviour {
 		
 		animator.SetFloat("WalkSpeed", Mathf.Abs(horizontal));
 
-		if(Mathf.Abs(horizontal) >= inputThreshold) {
-			float currentSpeed = horizontal * rigidbody2D.velocity.x;
+		rigidbody2D.velocity = new Vector2(horizontal * moveSpeed, rigidbody2D.velocity.y);
 
-			if (currentSpeed < moveSpeed) {
-				rigidbody2D.AddForce(Vector2.right * horizontal * (moveSpeed - currentSpeed), ForceMode2D.Impulse);
-			}
-
-			ConstrainSpeed ();
-			DetermineFacing(horizontal);
-		}
+		ConstrainSpeed ();
+		DetermineFacing(horizontal);
 	}
 
 	private void HandleVerticalMovement() {

@@ -903,10 +903,6 @@ Prefab:
       propertyPath: m_Name
       value: One Way Tile (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 1892346126384068, guid: 205efe071236ebe41af8158eb07cf8f7, type: 2}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 205efe071236ebe41af8158eb07cf8f7, type: 2}
   m_IsPrefabParent: 0
@@ -1585,6 +1581,11 @@ Prefab:
         type: 2}
       propertyPath: moveSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114506259501621652, guid: 7fbdf33e9c3f9f543a638bc4b1b225d3,
+        type: 2}
+      propertyPath: inputThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fbdf33e9c3f9f543a638bc4b1b225d3, type: 2}
