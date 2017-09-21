@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class CharacterController2D : MonoBehaviour {
 	// Threshold before input will be handled. Arbitrary.
-	public float inputThreshold = 0.2f;
+	public float inputThreshold = 0.5f;
 
 	public float moveSpeed = 2f;
 	public float maxSpeed = 5f;
@@ -54,7 +54,7 @@ public class CharacterController2D : MonoBehaviour {
 				rigidbody2D.AddForce(Vector2.right * horizontal * (moveSpeed - currentSpeed), ForceMode2D.Impulse);
 			}
 
-			ConstrainSpeed();
+			ConstrainSpeed ();
 			DetermineFacing(horizontal);
 		}
 	}
@@ -68,9 +68,7 @@ public class CharacterController2D : MonoBehaviour {
 	}
 
 	private void ConstrainSpeed() {
-		if (Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed) {
-			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
-		}
+		rigidbody2D.velocity = Vector3.ClampMagnitude(rigidbody2D.velocity, maxSpeed);
 	}
 
 	private void DetermineFacing(float horizontal) {
