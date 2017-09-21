@@ -51,16 +51,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1964326338463542
+--- !u!1 &1962181609127026
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4748696058447338}
+  - component: {fileID: 4835675738986982}
   m_Layer: 0
-  m_Name: GroundCheck
+  m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,19 +77,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4793764177000582}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4748696058447338
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1964326338463542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.261, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4793764177000582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4793764177000582
@@ -102,10 +89,23 @@ Transform:
   m_LocalPosition: {x: 0.028, y: 0.411, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4748696058447338}
   - {fileID: 4273243628933402}
+  - {fileID: 4835675738986982}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4835675738986982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962181609127026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.251, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4793764177000582}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20228073115820838
 Camera:
@@ -245,10 +245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c68674da6ada1e499679ee3e3fba0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 5
+  moveSpeed: 2
   maxSpeed: 5
-  jumpForce: 200
-  groundCheck: {fileID: 4748696058447338}
+  initialJumpForce: 5
+  extraJumpForce: 5
+  maxExtraJumpTime: 0.8
+  delayToExtraJumpForce: 0.3
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 256

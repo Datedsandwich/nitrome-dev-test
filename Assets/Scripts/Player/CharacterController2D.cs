@@ -6,28 +6,43 @@ using UnityEngine;
 public class CharacterController2D : MonoBehaviour {
 	public float moveSpeed = 2f;
 	public float maxSpeed = 5f;
-	public float jumpForce = 5f;
 
-	public Transform groundCheck;
+	//Jump related variables
+	public float initialJumpForce;
+	public float extraJumpForce;
+	public float maxExtraJumpTime;
+	public float delayToExtraJumpForce;
+	private float jumpTimer;
+	private bool hasJumped;
+	private bool isJumping;
+
 	public LayerMask groundLayerMask;
 
 	public bool isGrounded = false;
 	private bool facingRight = true;
-	private bool jump = false;
 
 	private Animator animator;
-	private Rigidbody2D rigidbody2D;
+	private new Rigidbody2D rigidbody2D;
+	private Transform groundCheck;
 
 	// Use this for initialization
 	void Start() {
 		animator = GetComponent<Animator>();
 		rigidbody2D = GetComponent<Rigidbody2D>();
+
+		groundCheck = transform.Find("Ground Check");
 	}
 	
 	// Update is called once per frame
 	void Update() {
 		if(Input.GetButtonDown("Jump") && isGrounded) {
-			jump = true;
+			hasJumped = true;
+			isJumping = true;
+			jumpTimer = Time.time;
+		}
+
+		if(Input.GetButtonUp("Jump") || Time.time - jumpTimer > maxExtraJumpTime) {
+			isJumping = false;
 		}
 	}
 
@@ -51,8 +66,12 @@ public class CharacterController2D : MonoBehaviour {
 	}
 
 	private void HandleVerticalMovement() {
-		if (jump) {
+		if (hasJumped) {
 			Jump();
+		}
+
+		if(isJumping) {
+			ExtendJump();
 		}
 
 		animator.SetFloat("VerticalSpeed", Mathf.Sign(rigidbody2D.velocity.y));
@@ -78,7 +97,14 @@ public class CharacterController2D : MonoBehaviour {
 
 	private void Jump() {
 		animator.SetTrigger("Jump");
-		rigidbody2D.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-		jump = false;
+
+		rigidbody2D.AddForce(transform.up * initialJumpForce, ForceMode2D.Impulse);
+		hasJumped = false;
+	}
+
+	private void ExtendJump() {
+		if (Time.time - jumpTimer > delayToExtraJumpForce) {
+			rigidbody2D.AddForce(transform.up * extraJumpForce);
+		}
 	}
 }
