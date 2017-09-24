@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Levels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Developer />
+  <Level>
+    <Item prefab="Player" x="0.03" y="0.41" />
+    <Item prefab="Solid Tile" x="-2.78" />
+    <Item prefab="Solid Tile" x="-2.54" />
+    <Item prefab="Solid Tile" x="-2.3" />
+    <Item prefab="Solid Tile" x="-2.06" />
+    <Item prefab="Solid Tile" x="-3.74" />
+    <Item prefab="Solid Tile" x="-3.5" />
+    <Item prefab="Solid Tile" x="-3.26" />
+    <Item prefab="Solid Tile" x="-3.02" />
+    <Item prefab="Solid Tile" x="-0.86" />
+    <Item prefab="Solid Tile" x="-0.62" />
+    <Item prefab="Solid Tile" x="-0.38" />
+    <Item prefab="Solid Tile" x="-0.14" />
+    <Item prefab="Solid Tile" x="-1.82" />
+    <Item prefab="Solid Tile" x="-1.58" />
+    <Item prefab="Solid Tile" x="-1.34" />
+    <Item prefab="Solid Tile" x="-1.1" />
+    <Item prefab="Solid Tile" x="1.06" />
+    <Item prefab="Solid Tile" x="1.3" />
+    <Item prefab="Solid Tile" x="1.54" />
+    <Item prefab="Solid Tile" x="1.78" />
+    <Item prefab="Solid Tile" x="0.1" />
+    <Item prefab="Solid Tile" x="0.34" />
+    <Item prefab="Solid Tile" x="0.58" />
+    <Item prefab="Solid Tile" x="0.82" />
+    <Item prefab="Solid Tile" x="2.98" />
+    <Item prefab="Solid Tile" x="3.22" />
+    <Item prefab="Solid Tile" x="3.46" />
+    <Item prefab="Solid Tile" x="3.7" />
+    <Item prefab="Solid Tile" x="2.02" />
+    <Item prefab="Solid Tile" x="2.26" />
+    <Item prefab="Solid Tile" x="2.5" />
+    <Item prefab="Solid Tile" x="2.74" />
+    <Item prefab="One Way Tile" y="1.13" />
+    <Item prefab="One Way Tile" x="0.24" y="1.13" />
+    <Item prefab="One Way Tile" x="-0.24" y="1.13" />
+    <Item prefab="One Way Tile" x="0.72" y="1.13" />
+    <Item prefab="One Way Tile" x="0.96" y="1.13" />
+    <Item prefab="One Way Tile" x="0.48" y="1.13" />
+    <Item prefab="One Way Tile" x="-0.72" y="1.13" />
+    <Item prefab="One Way Tile" x="-0.48" y="1.13" />
+    <Item prefab="One Way Tile" x="-0.96" y="1.13" />
+    <Item prefab="Coin" x="-1.9" y="0.25" />
+    <Item prefab="Coin" x="1.34" y="0.24" />
+    <Item prefab="Coin" x="-0.02" y="1.48" />
+  </Level>
+</Levels>
